@@ -17,7 +17,7 @@
          * @access protected
          */
         protected $__variables = array(
-            'crumbs' => 8,
+            'crumbs' => 10,
             'rpp' => 10,
             'key' => 'page',
             'target' => '',
