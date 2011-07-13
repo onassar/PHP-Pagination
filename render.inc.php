@@ -21,9 +21,6 @@
     // total page count calculation
     $pages = ((int) ceil($total / $rpp));
 
-    // encoded get parameters
-    $_get = encode($_GET);
-
     // if it's an invalid page request
     if ($current < 1) {
         return;
@@ -31,8 +28,11 @@
         return;
     }
 
-    // if more items than pagination-limit
-    if ($total > $rpp) {
+    // encoded get parameters
+    $_get = encode($_GET);
+
+    // if there are pages to be shown
+    if ($pages > 1) {
 
 ?>
 <div class="pagination">
@@ -67,22 +67,23 @@
              * Calculates the number of leading page crumbs based on the minimum
              *     and maximum possible leading pages.
              */
-            $leading = ((int) floor($crumbs / 2));
-            for ($x = 0; $x < ((int) floor($crumbs / 2)); ++$x) {
+            $max = min($pages, $crumbs);
+            $leading = ((int) floor($max / 2));
+            for ($x = 0; $x < ((int) floor($max / 2)); ++$x) {
                 if ($current === ($x + 1)) {
                     $leading = $x;
                     break;
                 }
             }
-            for ($x = $pages - ((int) floor($crumbs / 2)); $x < $pages; ++$x) {
+            for ($x = $pages - ((int) floor($max / 2)); $x < $pages; ++$x) {
                 if ($current === ($x + 1)) {
-                    $leading = $crumbs - ($pages - $x);
+                    $leading = $max - ($pages - $x);
                     break;
                 }
             }
 
             // calculate trailing crumb count based on inverse of leading
-            $trailing = $crumbs - $leading - 1;
+            $trailing = $max - $leading - 1;
 
             // generate/render leading crumbs
             for ($x = 0; $x < $leading; ++$x) {
@@ -142,3 +143,4 @@
     }
 
 ?>
+

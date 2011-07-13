@@ -17,12 +17,12 @@
          * @access protected
          */
         protected $__variables = array(
-            'crumbs' => 10,
+            'crumbs' => 5,
             'rpp' => 10,
             'key' => 'page',
             'target' => '',
             'next' => 'next',
-            'previous' => 'back',
+            'previous' => 'previous',
             'clean' => false
         );
 
@@ -204,3 +204,4 @@
     }
 
 ?>
+
