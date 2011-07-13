@@ -22,7 +22,7 @@
             'key' => 'page',
             'target' => '',
             'next' => 'next',
-            'previous' => 'previous',
+            'previous' => 'back',
             'clean' => false
         );
 
