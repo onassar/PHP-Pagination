@@ -10,13 +10,13 @@
     class Pagination
     {
         /**
-         * __variables. Sets default variables for the rendering of the
+         * _variables. Sets default variables for the rendering of the
          *     pagination markup.
          * 
          * @var array
          * @access protected
          */
-        protected $__variables = array(
+        protected $_variables = array(
             'crumbs' => 5,
             'rpp' => 10,
             'key' => 'page',
@@ -27,18 +27,18 @@
         );
 
         /**
-         * __check function. Checks the current (page) and total (records)
+         * _check function. Checks the current (page) and total (records)
          *     parameters to ensure they've been set. Throws an exception
          *     otherwise.
          * 
-         * @access private
+         * @access protected
          * @return void
          */
-        private function __check()
+        protected function _check()
         {
-            if (!isset($this->__variables['current'])) {
+            if (!isset($this->_variables['current'])) {
                 throw new Exception('Pagination::current must be set.');
-            } elseif (!isset($this->__variables['total'])) {
+            } elseif (!isset($this->_variables['total'])) {
                 throw new Exception('Pagination::total must be set.');
             }
         }
@@ -51,6 +51,26 @@
          */
         public function __construct()
         {
+            // encoded get parameters
+            $this->_variables['get'] = $this->_encode($_GET);
+        }
+
+        /**
+         * _encode function.
+         * 
+         * @access protected
+         * @param mixed $mixed
+         * @return array
+         */
+        protected function _encode($mixed)
+        {
+            if (is_array($mixed)) {
+                foreach ($mixed as $key => $value) {
+                    $mixed[$key] = $this->_encode($value);
+                }
+                return $mixed;
+            }
+            return htmlentities($mixed, ENT_QUOTES, 'UTF-8');
         }
 
         /**
@@ -63,19 +83,19 @@
         public function parse()
         {
             // ensure required parameters were set
-            $this->__check();
+            $this->_check();
 
             // bring variables forward
-            foreach ($this->__variables as $__name => $__value) {
-                $$__name = $__value;
+            foreach ($this->_variables as $_name => $_value) {
+                $$_name = $_value;
             }
 
             // buffer handling
             ob_start();
             include 'render.inc.php';
-            $__response = ob_get_contents();
+            $_response = ob_get_contents();
             ob_end_clean();
-            return $__response;
+            return $_response;
         }
 
         /**
@@ -88,7 +108,7 @@
          */
         public function setClean()
         {
-            $this->__variables['clean'] = true;
+            $this->_variables['clean'] = true;
         }
 
         /**
@@ -101,7 +121,7 @@
          */
         public function setCrumbs($crumbs)
         {
-            $this->__variables['crumbs'] = $crumbs;
+            $this->_variables['crumbs'] = $crumbs;
         }
 
         /**
@@ -113,7 +133,7 @@
          */
         public function setCurrent($current)
         {
-            $this->__variables['current'] = $current;
+            $this->_variables['current'] = $current;
         }
 
         /**
@@ -124,7 +144,7 @@
          */
         public function setFull()
         {
-            $this->__variables['clean'] = false;
+            $this->_variables['clean'] = false;
         }
 
         /**
@@ -137,7 +157,7 @@
          */
         public function setKey($key)
         {
-            $this->__variables['key'] = $key;
+            $this->_variables['key'] = $key;
         }
 
         /**
@@ -149,7 +169,7 @@
          */
         public function setNext($str)
         {
-            $this->__variables['next'] = $str;
+            $this->_variables['next'] = $str;
         }
 
         /**
@@ -161,7 +181,7 @@
          */
         public function setPrevious($str)
         {
-            $this->__variables['previous'] = $str;
+            $this->_variables['previous'] = $str;
         }
 
         /**
@@ -174,7 +194,7 @@
          */
         public function setRPP($rpp)
         {
-            $this->__variables['rpp'] = $rpp;
+            $this->_variables['rpp'] = $rpp;
         }
 
         /**
@@ -186,7 +206,7 @@
          */
         public function setTarget($target)
         {
-            $this->__variables['target'] = $target;
+            $this->_variables['target'] = $target;
         }
 
         /**
@@ -199,9 +219,8 @@
          */
         public function setTotal($total)
         {
-            $this->__variables['total'] = $total;
+            $this->_variables['total'] = $total;
         }
     }
 
 ?>
-

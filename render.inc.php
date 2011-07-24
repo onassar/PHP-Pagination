@@ -1,23 +1,5 @@
 <?php
 
-    /**
-     * encode function.
-     * 
-     * @access public
-     * @param mixed $mixed
-     * @return mixed
-     */
-    function encode($mixed)
-    {
-        if (is_array($mixed)) {
-            foreach ($mixed as $key => $value) {
-                $mixed[$key] = encode($value);
-            }
-            return $mixed;
-        }
-        return htmlentities($mixed, ENT_QUOTES, 'UTF-8');
-    }
-
     // total page count calculation
     $pages = ((int) ceil($total / $rpp));
 
@@ -27,9 +9,6 @@
     } elseif ($current > $pages) {
         return;
     }
-
-    // encoded get parameters
-    $_get = encode($_GET);
 
     // if there are pages to be shown
     if ($pages > 1) {
@@ -45,7 +24,7 @@
 
         // anchor classes and target
         $classes = array();
-        $params = $_get;
+        $params = $get;
         $params[$key] = ($current - 1);
         $href = ($target) . '?' . http_build_query($params);
         if ($current === 1) {
@@ -89,7 +68,7 @@
             for ($x = 0; $x < $leading; ++$x) {
 
                 // class/href setup
-                $params = $_get;
+                $params = $get;
                 $params[$key] = ($current + $x - $leading);
                 $href = ($target) . '?' . http_build_query($params);
 
@@ -109,7 +88,7 @@
             for ($x = 0; $x < $trailing; ++$x) {
 
                 // class/href setup
-                $params = $_get;
+                $params = $get;
                 $params[$key] = ($current + $x + 1);
                 $href = ($target) . '?' . http_build_query($params);
 
@@ -126,7 +105,7 @@
 
         // anchor classes and target
         $classes = array();
-        $params = $_get;
+        $params = $get;
         $params[$key] = ($current + 1);
         $href = ($target) . '?' . http_build_query($params);
         if ($current === $pages) {
@@ -143,4 +122,3 @@
     }
 
 ?>
-
