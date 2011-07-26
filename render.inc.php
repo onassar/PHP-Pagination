@@ -47,14 +47,15 @@
              *     and maximum possible leading pages.
              */
             $max = min($pages, $crumbs);
-            $leading = ((int) floor($max / 2));
-            for ($x = 0; $x < ((int) floor($max / 2)); ++$x) {
+            $limit = ((int) floor($max / 2));
+            $leading = $limit;
+            for ($x = 0; $x < $limit; ++$x) {
                 if ($current === ($x + 1)) {
                     $leading = $x;
                     break;
                 }
             }
-            for ($x = $pages - ((int) floor($max / 2)); $x < $pages; ++$x) {
+            for ($x = $pages - $limit; $x < $pages; ++$x) {
                 if ($current === ($x + 1)) {
                     $leading = $max - ($pages - $x);
                     break;
