@@ -10,14 +10,14 @@
      * @todo    add setter parameter type and range checks w/ exceptions
      * @example
      * <code>
-     *     require_once APP . '/open/PHP-Pagination/Pagination.class.php';
+     *     require_once APP . '/vendors/PHP-Pagination/Pagination.class.php';
      *     $page = isset($_GET['page']) ? ((int) $_GET['page']) : 1;
      *     $pagination = (new Pagination($page, 200));
      *     $markup = $pagination->parse();
      * </code>
      * @example
      * <code>
-     *     require_once APP . '/open/PHP-Pagination/Pagination.class.php';
+     *     require_once APP . '/vendors/PHP-Pagination/Pagination.class.php';
      *     $page = isset($_GET['page']) ? ((int) $_GET['page']) : 1;
      *     $pagination = (new Pagination());
      *     $pagination->setCurrent($page);
