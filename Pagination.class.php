@@ -1,11 +1,29 @@
 <?php
 
     /**
-     * Pagination class. Supplies an API for setting pagination details, and
-     *     renders the resulting pagination markup (html) through the included
-     *     render.inc.php file.
+     * Pagination
      * 
-     * @todo add setter parameter type and range checks w/ exceptions
+     * Supplies an API for setting pagination details, and renders the resulting
+     * pagination markup (html) through the included render.inc.php file.
+     * 
+     * @author  Oliver Nassar <onassar@gmail.com>
+     * @todo    add setter parameter type and range checks w/ exceptions
+     * @example
+     * <code>
+     *     require_once APP . '/open/PHP-Pagination/Pagination.class.php';
+     *     $page = isset($_GET['page']) ? ((int) $_GET['page']) : 1;
+     *     $pagination = (new Pagination($page, 200));
+     *     $markup = $pagination->parse();
+     * </code>
+     * @example
+     * <code>
+     *     require_once APP . '/open/PHP-Pagination/Pagination.class.php';
+     *     $page = isset($_GET['page']) ? ((int) $_GET['page']) : 1;
+     *     $pagination = (new Pagination());
+     *     $pagination->setCurrent($page);
+     *     $pagination->setTotal(200);
+     *     $markup = $pagination->parse();
+     * </code>
      */
     class Pagination
     {
@@ -27,6 +45,30 @@
         );
 
         /**
+         * __construct function.
+         * 
+         * @access public
+         * @param integer $current (default: null)
+         * @param integer $total (default: null)
+         * @return void
+         */
+        public function __construct($current = null, $total = null)
+        {
+            // current instantiation setting
+            if (!is_null($current)) {
+                $this->setCurrent($current);
+            }
+
+            // total instantiation setting
+            if (!is_null($total)) {
+                $this->setTotal($total);
+            }
+
+            // encoded get parameters
+            $this->_variables['get'] = $this->_encode($_GET);
+        }
+
+        /**
          * _check function. Checks the current (page) and total (records)
          *     parameters to ensure they've been set. Throws an exception
          *     otherwise.
@@ -41,18 +83,6 @@
             } elseif (!isset($this->_variables['total'])) {
                 throw new Exception('Pagination::total must be set.');
             }
-        }
-
-        /**
-         * __construct function.
-         * 
-         * @access public
-         * @return void
-         */
-        public function __construct()
-        {
-            // encoded get parameters
-            $this->_variables['get'] = $this->_encode($_GET);
         }
 
         /**
@@ -222,5 +252,3 @@
             $this->_variables['total'] = $total;
         }
     }
-
-?>

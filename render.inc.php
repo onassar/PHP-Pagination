@@ -1,5 +1,4 @@
 <?php
-
     // total page count calculation
     $pages = ((int) ceil($total / $rpp));
 
@@ -12,12 +11,10 @@
 
     // if there are pages to be shown
     if ($pages > 1) {
-
 ?>
 <div class="pagination">
     <ul class="clear">
 <?php
-
         /**
          * Previous Link
          */
@@ -31,11 +28,9 @@
             $href = '#';
             array_push($classes, 'disabled');
         }
-
 ?>
         <li class="copy previous"><a href="<?= ($href) ?>" class="<?= implode(' ', $classes) ?>"><?= ($previous) ?></a></li>
 <?php
-
         /**
          * if this isn't a clean output for pagination (eg. show numerical
          * links)
@@ -72,19 +67,15 @@
                 $params = $get;
                 $params[$key] = ($current + $x - $leading);
                 $href = ($target) . '?' . http_build_query($params);
-
 ?>
         <li class="number"><a href="<?= ($href) ?>"><?= ($current + $x - $leading) ?></a></li>
 <?php
-
             }
 
             // print current page
-
 ?>
         <li class="number"><a href="#" class="current"><?= ($current) ?></a></li>
 <?php
-
             // generate/render trailing crumbs
             for ($x = 0; $x < $trailing; ++$x) {
 
@@ -92,11 +83,9 @@
                 $params = $get;
                 $params[$key] = ($current + $x + 1);
                 $href = ($target) . '?' . http_build_query($params);
-
 ?>
         <li class="number"><a href="<?= ($href) ?>"><?= ($current + $x + 1) ?></a></li>
 <?php
-
             }
         }
 
@@ -113,13 +102,9 @@
             $href = '#';
             array_push($classes, 'disabled');
         }
-
 ?>
         <li class="copy next"><a href="<?= ($href) ?>" class="<?= implode(' ', $classes) ?>"><?= ($next) ?></a></li>
     </ul>
 </div>
 <?php
-
     }
-
-?>
