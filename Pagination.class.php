@@ -10,28 +10,41 @@
      * @todo    add setter parameter type and range checks w/ exceptions
      * @example
      * <code>
+     *     // source inclusion
      *     require_once APP . '/vendors/PHP-Pagination/Pagination.class.php';
+     *     
+     *     // determine page (based on <_GET>)
      *     $page = isset($_GET['page']) ? ((int) $_GET['page']) : 1;
+     *     
+     *     // instantiate with page and records as constructor parameters
      *     $pagination = (new Pagination($page, 200));
      *     $markup = $pagination->parse();
      * </code>
      * @example
      * <code>
+     *     // source inclusion
      *     require_once APP . '/vendors/PHP-Pagination/Pagination.class.php';
+     *     
+     *     // determine page (based on <_GET>)
      *     $page = isset($_GET['page']) ? ((int) $_GET['page']) : 1;
+     *     
+     *     // instantiate; set current page; set number of records
      *     $pagination = (new Pagination());
      *     $pagination->setCurrent($page);
      *     $pagination->setTotal(200);
+     *     
+     *     // grab rendered/parsed pagination markup
      *     $markup = $pagination->parse();
      * </code>
      */
     class Pagination
     {
         /**
-         * _variables. Sets default variables for the rendering of the
-         *     pagination markup.
+         * _variables
          * 
-         * @var array
+         * Sets default variables for the rendering of the pagination markup.
+         * 
+         * @var    array
          * @access protected
          */
         protected $_variables = array(
@@ -45,11 +58,11 @@
         );
 
         /**
-         * __construct function.
+         * __construct
          * 
          * @access public
-         * @param integer $current (default: null)
-         * @param integer $total (default: null)
+         * @param  integer $current (default: null)
+         * @param  integer $total (default: null)
          * @return void
          */
         public function __construct($current = null, $total = null)
@@ -69,9 +82,10 @@
         }
 
         /**
-         * _check function. Checks the current (page) and total (records)
-         *     parameters to ensure they've been set. Throws an exception
-         *     otherwise.
+         * _check
+         * 
+         * Checks the current (page) and total (records) parameters to ensure
+         * they've been set. Throws an exception otherwise.
          * 
          * @access protected
          * @return void
@@ -86,10 +100,10 @@
         }
 
         /**
-         * _encode function.
+         * _encode
          * 
          * @access protected
-         * @param mixed $mixed
+         * @param  mixed $mixed
          * @return array
          */
         protected function _encode($mixed)
@@ -104,8 +118,10 @@
         }
 
         /**
-         * parse function. Parses the pagination markup based on the parameters
-         *     set and the logic found in the render.inc.php file.
+         * parse
+         * 
+         * Parses the pagination markup based on the parameters set and the
+         * logic found in the render.inc.php file.
          * 
          * @access public
          * @return void
@@ -129,9 +145,10 @@
         }
 
         /**
-         * setClean function. Sets the pagination to exclude page numbers, and
-         *     only output previous/next markup. The counter-method of this is
-         *     self::setFull.
+         * setClean
+         * 
+         * Sets the pagination to exclude page numbers, and only output
+         * previous/next markup. The counter-method of this is self::setFull.
          * 
          * @access public
          * @return void
@@ -142,11 +159,13 @@
         }
 
         /**
-         * setCrumbs function. Sets the maximum number of 'crumbs' (eg.
-         *     numerical page items) available.
+         * setCrumbs
+         * 
+         * Sets the maximum number of 'crumbs' (eg. numerical page items)
+         * available.
          * 
          * @access public
-         * @param int $crumbs
+         * @param  integer $crumbs
          * @return void
          */
         public function setCrumbs($crumbs)
@@ -155,10 +174,12 @@
         }
 
         /**
-         * setCurrent function. Sets the current page being viewed.
+         * setCurrent
+         * 
+         * Sets the current page being viewed.
          * 
          * @access public
-         * @param int $current
+         * @param  integer $current
          * @return void
          */
         public function setCurrent($current)
@@ -167,7 +188,9 @@
         }
 
         /**
-         * setFull function. See self::setClean for documentation.
+         * setFull
+         * 
+         * See self::setClean for documentation.
          * 
          * @access public
          * @return void
@@ -178,11 +201,13 @@
         }
 
         /**
-         * setKey function. Sets the key of the _GET array that contains, and
-         *     ought to contain, paging information.
+         * setKey
+         * 
+         * Sets the key of the <_GET> array that contains, and ought to contain,
+         * paging information.
          * 
          * @access public
-         * @param string $key
+         * @param  string $key
          * @return void
          */
         public function setKey($key)
@@ -191,10 +216,12 @@
         }
 
         /**
-         * setNext function. Sets the copy of the next anchor.
+         * setNext
+         * 
+         * Sets the copy of the next anchor.
          * 
          * @access public
-         * @param string $str
+         * @param  string $str
          * @return void
          */
         public function setNext($str)
@@ -203,10 +230,12 @@
         }
 
         /**
-         * setPrevious function. Sets the copy of the previous anchor.
+         * setPrevious
+         * 
+         * Sets the copy of the previous anchor.
          * 
          * @access public
-         * @param string $str
+         * @param  string $str
          * @return void
          */
         public function setPrevious($str)
@@ -215,11 +244,13 @@
         }
 
         /**
-         * setRPP function. Sets the number of records per page (used for
-         *     determining total page counts).
+         * setRPP
+         * 
+         * Sets the number of records per page (used for determining total page
+         * counts).
          * 
          * @access public
-         * @param int $rpp
+         * @param  integer $rpp
          * @return void
          */
         public function setRPP($rpp)
@@ -228,10 +259,12 @@
         }
 
         /**
-         * setTarget function. Sets the leading path for anchors.
+         * setTarget
+         * 
+         * Sets the leading path for anchors.
          * 
          * @access public
-         * @param string $target
+         * @param  string $target
          * @return void
          */
         public function setTarget($target)
@@ -240,11 +273,12 @@
         }
 
         /**
-         * setTotal function. Sets the total number of records available for
-         *     pagination.
+         * setTotal
+         * 
+         * Sets the total number of records available for pagination.
          * 
          * @access public
-         * @param int $total
+         * @param  integer $total
          * @return void
          */
         public function setTotal($total)
