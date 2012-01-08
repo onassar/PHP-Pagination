@@ -11,6 +11,9 @@ the instance&#039;s *&lt;parse&gt; method.
 
 ### Pagination Instantiation and Rendering
 
+``` php
+<?php
+
     // source inclusion
     require_once APP . '/vendors/PHP-Pagination/Pagination.class.php';
 
@@ -24,3 +27,5 @@ the instance&#039;s *&lt;parse&gt; method.
 
     // grab rendered/parsed pagination markup
     $markup = $pagination->parse();
+
+```
