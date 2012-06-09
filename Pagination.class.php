@@ -204,7 +204,7 @@
          * setKey
          * 
          * Sets the key of the <_GET> array that contains, and ought to contain,
-         * paging information.
+         * paging information (eg. which page is being viewed).
          * 
          * @access public
          * @param  string $key
@@ -246,8 +246,8 @@
         /**
          * setRPP
          * 
-         * Sets the number of records per page (used for determining total page
-         * counts).
+         * Sets the number of records per page (used for determining total
+         * number of pages).
          * 
          * @access public
          * @param  integer $rpp
