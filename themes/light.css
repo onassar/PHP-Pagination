@@ -1,0 +1,74 @@
+/* clearfix */
+.clear:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.clear {
+    display: inline-block;
+}
+* html .clear {
+    height: 1%;
+}
+.clear {
+    display: block;
+}
+
+/* pagination styling */
+.pagination {
+	font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+	height: 30px;
+	font-size: 0.75em;
+	-webkit-font-smoothing: antialiased;
+}
+.pagination ul li {
+    float: left;
+    display: block;
+    width: 30px;
+}
+.pagination ul li a {
+    background: url(/static/img/helpers/pagination/sprite.png) no-repeat;
+    width: 27px;
+    height: 27px;
+    line-height: 27px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+	color: #717171;
+	text-shadow: 1px 1px 0 #fff;
+}
+.pagination ul li a.disabled {
+    visibility: hidden;
+}
+.pagination ul li.copy a {
+    text-indent: -10000px;
+}
+.pagination ul li.previous a {
+    background-position: -28px 0;
+}
+.pagination ul li.previous a:hover {
+    background-position: -28px -27px;
+}
+.pagination ul li.number a:hover {
+    background-position: 0 -27px;
+}
+.pagination ul li.next a {
+    background-position: -112px 0;
+}
+.pagination ul li.next a:hover {
+    background-position: -112px -27px;
+}
+.pagination ul li.copy a.disabled {
+    cursor: default;
+}
+.pagination ul li a.current {
+    background-position: right 0;
+    color: #fff;
+    cursor: default;
+	text-shadow:0 1px 0 #585858;
+}
+.pagination ul li a.current:hover {
+    background-position: right 0;
+}
