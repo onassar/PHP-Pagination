@@ -29,7 +29,7 @@
     width: 30px;
 }
 .pagination ul li a {
-    background: url(/static/img/helpers/pagination/sprite.png) no-repeat;
+    background: url(sprite.png) no-repeat;
     width: 27px;
     height: 27px;
     line-height: 27px;
