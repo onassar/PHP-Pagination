@@ -18,10 +18,10 @@
 
 /* pagination styling */
 .pagination {
-	font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
-	height: 30px;
-	font-size: 0.75em;
-	-webkit-font-smoothing: antialiased;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    height: 30px;
+    font-size: 0.75em;
+    -webkit-font-smoothing: antialiased;
 }
 .pagination ul li {
     float: left;
@@ -36,8 +36,8 @@
     text-decoration: none;
     display: block;
     text-align: center;
-	color: #717171;
-	text-shadow: 1px 1px 0 #fff;
+    color: #717171;
+    text-shadow: 1px 1px 0 #fff;
 }
 .pagination ul li a.disabled {
     visibility: hidden;
@@ -67,7 +67,7 @@
     background-position: right 0;
     color: #fff;
     cursor: default;
-	text-shadow:0 1px 0 #585858;
+    text-shadow:0 1px 0 #585858;
 }
 .pagination ul li a.current:hover {
     background-position: right 0;
