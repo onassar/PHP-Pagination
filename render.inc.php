@@ -12,7 +12,7 @@
     // if there are pages to be shown
     if ($pages > 1) {
 ?>
-<div class="pagination">
+<div class="<?= implode(' ', $classes) ?>">
     <ul class="clear">
 <?php
         /**
@@ -20,7 +20,7 @@
          */
 
         // anchor classes and target
-        $classes = array();
+        $classes = array('copy', 'previous');
         $params = $get;
         $params[$key] = ($current - 1);
         $href = ($target) . '?' . http_build_query($params);
@@ -29,7 +29,7 @@
             array_push($classes, 'disabled');
         }
 ?>
-        <li class="copy previous"><a href="<?= ($href) ?>" class="<?= implode(' ', $classes) ?>"><?= ($previous) ?></a></li>
+        <li class="<?= implode(' ', $classes) ?>"><a href="<?= ($href) ?>"><?= ($previous) ?></a></li>
 <?php
         /**
          * if this isn't a clean output for pagination (eg. show numerical
@@ -74,7 +74,7 @@
 
             // print current page
 ?>
-        <li class="number"><a href="#" class="current"><?= ($current) ?></a></li>
+        <li class="number active"><a href="#"><?= ($current) ?></a></li>
 <?php
             // generate/render trailing crumbs
             for ($x = 0; $x < $trailing; ++$x) {
@@ -94,7 +94,7 @@
          */
 
         // anchor classes and target
-        $classes = array();
+        $classes = array('copy', 'next');
         $params = $get;
         $params[$key] = ($current + 1);
         $href = ($target) . '?' . http_build_query($params);
@@ -103,7 +103,7 @@
             array_push($classes, 'disabled');
         }
 ?>
-        <li class="copy next"><a href="<?= ($href) ?>" class="<?= implode(' ', $classes) ?>"><?= ($next) ?></a></li>
+        <li class="<?= implode(' ', $classes) ?>"><a href="<?= ($href) ?>"><?= ($next) ?></a></li>
     </ul>
 </div>
 <?php

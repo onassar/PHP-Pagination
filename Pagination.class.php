@@ -48,12 +48,13 @@
          * @access protected
          */
         protected $_variables = array(
+            'classes' => array('pagination'),
             'crumbs' => 5,
             'rpp' => 10,
             'key' => 'page',
             'target' => '',
-            'next' => 'next',
-            'previous' => 'previous',
+            'next' => 'Next &raquo;',
+            'previous' => '&laquo; Previous',
             'clean' => false
         );
 
@@ -118,6 +119,25 @@
         }
 
         /**
+         * addClasses
+         * 
+         * Sets the classes to be added to the pagination div node.
+         * Useful with Twitter Bootstrap (eg. pagination-centered, etc.)
+         * 
+         * @see    <http://twitter.github.com/bootstrap/components.html#pagination>
+         * @access public
+         * @param  mixed $classes
+         * @return void
+         */
+        public function addClasses($classes)
+        {
+            $this->_variables['classes'] = array_merge(
+                $this->_variables['classes'],
+                (array) $classes
+            );
+        }
+
+        /**
          * parse
          * 
          * Parses the pagination markup based on the parameters set and the
@@ -142,6 +162,19 @@
             $_response = ob_get_contents();
             ob_end_clean();
             return $_response;
+        }
+
+        /**
+         * setClasses
+         * 
+         * @see    <http://twitter.github.com/bootstrap/components.html#pagination>
+         * @access public
+         * @param  mixed $classes
+         * @return void
+         */
+        public function setClasses($classes)
+        {
+            $this->_variables['classes'] = (array) $classes;
         }
 
         /**

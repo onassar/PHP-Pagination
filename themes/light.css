@@ -1,3 +1,4 @@
+
 /* clearfix */
 .clear:after {
     content: ".";
@@ -40,7 +41,7 @@
     color: #717171;
     text-shadow: 1px 1px 0 #fff;
 }
-.pagination ul li a.disabled {
+.pagination ul li.disabled a {
     visibility: hidden;
 }
 .pagination ul li.copy a {
@@ -61,15 +62,15 @@
 .pagination ul li.next a:hover {
     background-position: -112px -27px;
 }
-.pagination ul li.copy a.disabled {
+.pagination ul li.copy.disabled a {
     cursor: default;
 }
-.pagination ul li a.current {
+.pagination ul li.active a {
     background-position: right 0;
     color: #fff;
     cursor: default;
     text-shadow:0 1px 0 #585858;
 }
-.pagination ul li a.current:hover {
+.pagination ul li.active a:hover {
     background-position: right 0;
 }
