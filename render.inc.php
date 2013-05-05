@@ -24,6 +24,11 @@
         $params = $get;
         $params[$key] = ($current - 1);
         $href = ($target) . '?' . http_build_query($params);
+        $href = preg_replace(
+            array('/=$/', '/=&/'),
+            array('', '&'),
+            $href
+        );
         if ($current === 1) {
             $href = '#';
             array_push($classes, 'disabled');
@@ -67,6 +72,11 @@
                 $params = $get;
                 $params[$key] = ($current + $x - $leading);
                 $href = ($target) . '?' . http_build_query($params);
+                $href = preg_replace(
+                    array('/=$/', '/=&/'),
+                    array('', '&'),
+                    $href
+                );
 ?>
         <li class="number"><a href="<?= ($href) ?>"><?= ($current + $x - $leading) ?></a></li>
 <?php
@@ -83,6 +93,11 @@
                 $params = $get;
                 $params[$key] = ($current + $x + 1);
                 $href = ($target) . '?' . http_build_query($params);
+                $href = preg_replace(
+                    array('/=$/', '/=&/'),
+                    array('', '&'),
+                    $href
+                );
 ?>
         <li class="number"><a href="<?= ($href) ?>"><?= ($current + $x + 1) ?></a></li>
 <?php
@@ -98,6 +113,11 @@
         $params = $get;
         $params[$key] = ($current + 1);
         $href = ($target) . '?' . http_build_query($params);
+        $href = preg_replace(
+            array('/=$/', '/=&/'),
+            array('', '&'),
+            $href
+        );
         if ($current === $pages) {
             $href = '#';
             array_push($classes, 'disabled');
