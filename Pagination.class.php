@@ -138,6 +138,121 @@
         }
 
         /**
+         * getCanonicalUrl
+         * 
+         * @access public
+         * @return string
+         */
+        public function getCanonicalUrl()
+        {
+            $target = $this->_variables['target'];
+            if (empty($target)) {
+                $target = $_SERVER['PHP_SELF'];
+            }
+            $page = (int) $this->_variables['current'];
+            if ($page !== 1) {
+                return 'http://' . ($_SERVER['HTTP_HOST']) . ($target) . $this->getPageParam();
+            }
+            return 'http://' . ($_SERVER['HTTP_HOST']) . ($target);
+        }
+
+        /**
+         * getPageParam
+         * 
+         * @access public
+         * @param  boolean|integer $page (default: false)
+         * @return string
+         */
+        public function getPageParam($page = false)
+        {
+            if ($page === false) {
+                $page = (int) $this->_variables['current'];
+            }
+            $key = $this->_variables['key'];
+            return '?' . ($key) . '=' . ((int) $page);
+        }
+
+        /**
+         * getPageUrl
+         * 
+         * @access public
+         * @param  boolean|integer $page (default: false)
+         * @return string
+         */
+        public function getPageUrl($page = false)
+        {
+            $target = $this->_variables['target'];
+            if (empty($target)) {
+                $target = $_SERVER['PHP_SELF'];
+            }
+            return 'http://' . ($_SERVER['HTTP_HOST']) . ($target) . ($this->getPageParam($page));
+        }
+
+        /**
+         * getRelPrevNextLinkTags
+         * 
+         * @see    http://support.google.com/webmasters/bin/answer.py?hl=en&answer=1663744
+         * @see    http://googlewebmastercentral.blogspot.ca/2011/09/pagination-with-relnext-and-relprev.html
+         * @see    http://support.google.com/webmasters/bin/answer.py?hl=en&answer=139394
+         * @access public
+         * @return array
+         */
+        public function getRelPrevNextLinkTags()
+        {
+            // generate path
+            $target = $this->_variables['target'];
+            if (empty($target)) {
+                $target = $_SERVER['PHP_SELF'];
+            }
+            $key = $this->_variables['key'];
+            $params = $this->_variables['get'];
+            $params[$key] = 'pgnmbr';
+            $href = ($target) . '?' . http_build_query($params);
+            $href = preg_replace(
+                array('/=$/', '/=&/'),
+                array('', '&'),
+                $href
+            );
+            $href = 'http://' . ($_SERVER['HTTP_HOST']) . $href;
+
+            // Pages
+            $currentPage = (int) $this->_variables['current'];
+            $numberOfPages = (
+                (int) ceil(
+                    $this->_variables['total'] /
+                    $this->_variables['rpp']
+                )
+            );
+
+            // On first page
+            if ($currentPage === 1) {
+
+                // There is a page after this one
+                if ($numberOfPages > 1) {
+                    $href = str_replace('pgnmbr', 2, $href);
+                    return array(
+                        '<link rel="next" href="' . ($href) . '" />'
+                    );
+                }
+                return array();
+            }
+
+            // Store em
+            $prevNextTags = array(
+                '<link rel="prev" href="' . (str_replace('pgnmbr', $currentPage - 1, $href)) . '" />'
+            );
+
+            // There is a page after this one
+            if ($numberOfPages > $currentPage) {
+                array_push(
+                    $prevNextTags,
+                    '<link rel="next" href="' . (str_replace('pgnmbr', $currentPage + 1, $href)) . '" />'
+                );
+            }
+            return $prevNextTags;
+        }
+
+        /**
          * parse
          * 
          * Parses the pagination markup based on the parameters set and the
