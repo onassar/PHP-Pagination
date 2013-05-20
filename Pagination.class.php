@@ -6,6 +6,11 @@
      * Supplies an API for setting pagination details, and renders the resulting
      * pagination markup (html) through the included render.inc.php file.
      * 
+     * @note    The SEO methods (canonical/rel) were written following Google's
+     *          suggested patterns. Namely, the canoical url excludes any 
+     *          peripheral parameters that don't relate to the pagination
+     *          series. Whereas the prev/next rel link tags include any params
+     *          found in the request.
      * @author  Oliver Nassar <onassar@gmail.com>
      * @todo    add setter parameter type and range checks w/ exceptions
      * @example
