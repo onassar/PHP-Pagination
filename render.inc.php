@@ -31,7 +31,7 @@
         );
         if ($current === 1) {
             $href = '#';
-    		$onclick = '" onclick="return false;';
+            $onclick = '" onclick="return false;';
             array_push($classes, 'disabled');
         }
 ?>
