@@ -31,10 +31,11 @@
         );
         if ($current === 1) {
             $href = '#';
+            $onclick = '" onclick="return false;';
             array_push($classes, 'disabled');
         }
 ?>
-        <li class="<?= implode(' ', $classes) ?>"><a href="<?= ($href) ?>"><?= ($previous) ?></a></li>
+        <li class="<?= implode(' ', $classes) ?>"><a href="<?= ($href.$onclick) ?>"><?= ($previous) ?></a></li>
 <?php
         /**
          * if this isn't a clean output for pagination (eg. show numerical
@@ -84,7 +85,7 @@
 
             // print current page
 ?>
-        <li class="number active"><a href="#"><?= ($current) ?></a></li>
+        <li class="number active"><a href="#" onClick="return false;"><?= ($current) ?></a></li>
 <?php
             // generate/render trailing crumbs
             for ($x = 0; $x < $trailing; ++$x) {
@@ -120,10 +121,11 @@
         );
         if ($current === $pages) {
             $href = '#';
+            $onclick = '" onclick="return false;';
             array_push($classes, 'disabled');
         }
 ?>
-        <li class="<?= implode(' ', $classes) ?>"><a href="<?= ($href) ?>"><?= ($next) ?></a></li>
+        <li class="<?= implode(' ', $classes) ?>"><a href="<?= ($href.$onclick) ?>"><?= ($next) ?></a></li>
     </ul>
 </div>
 <?php
