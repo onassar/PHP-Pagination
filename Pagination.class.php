@@ -53,7 +53,7 @@
          * @access protected
          */
         protected $_variables = array(
-            'classes' => array('pagination'),
+            'classes' => array('clearfix', 'pagination'),
             'crumbs' => 5,
             'rpp' => 10,
             'key' => 'page',
