@@ -83,8 +83,8 @@
                 $this->setTotal($total);
             }
 
-            // encoded get parameters
-            $this->_variables['get'] = $this->_encode($_GET);
+            // Pass along get (for link generation)
+            $this->_variables['get'] = $_GET;
         }
 
         /**
@@ -103,24 +103,6 @@
             } elseif (!isset($this->_variables['total'])) {
                 throw new Exception('Pagination::total must be set.');
             }
-        }
-
-        /**
-         * _encode
-         * 
-         * @access protected
-         * @param  mixed $mixed
-         * @return array
-         */
-        protected function _encode($mixed)
-        {
-            if (is_array($mixed)) {
-                foreach ($mixed as $key => $value) {
-                    $mixed[$key] = $this->_encode($value);
-                }
-                return $mixed;
-            }
-            return htmlentities($mixed, ENT_QUOTES, 'UTF-8');
         }
 
         /**
