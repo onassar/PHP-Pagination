@@ -10,7 +10,7 @@
     }
 
     // if there are pages to be shown
-    if ($pages > 1) {
+    if ($pages > 1 || $alwaysShowPagination === true) {
 ?>
 <ul class="<?= implode(' ', $classes) ?>">
 <?php

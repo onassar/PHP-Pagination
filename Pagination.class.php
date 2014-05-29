@@ -60,6 +60,7 @@
             'target' => '',
             'next' => 'Next &raquo;',
             'previous' => '&laquo; Previous',
+            'alwaysShowPagination' => false,
             'clean' => false
         );
 
@@ -122,6 +123,20 @@
                 $this->_variables['classes'],
                 (array) $classes
             );
+        }
+
+        /**
+         * alwaysShowPagination
+         * 
+         * Tells the rendering engine to show the pagination links even if there
+         * aren't any pages to paginate through.
+         * 
+         * @access public
+         * @return void
+         */
+        public function alwaysShowPagination()
+        {
+            $this->_variables['alwaysShowPagination'] = true;
         }
 
         /**
