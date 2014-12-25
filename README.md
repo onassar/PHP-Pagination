@@ -21,7 +21,7 @@ the instance&#039;s *&lt;parse&gt; method.
     $page = isset($_GET['page']) ? ((int) $_GET['page']) : 1;
 
     // instantiate; set current page; set number of records
-    $pagination = (new Pagination());
+    $pagination = new Pagination();
     $pagination->setCurrent($page);
     $pagination->setTotal(200);
 
