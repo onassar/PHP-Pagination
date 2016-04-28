@@ -61,7 +61,8 @@
             'next' => 'Next &raquo;',
             'previous' => '&laquo; Previous',
             'alwaysShowPagination' => false,
-            'clean' => false
+            'clean' => false,
+            'content' => array()
         );
 
         /**
@@ -434,5 +435,20 @@
         public function setTotal($total)
         {
             $this->_variables['total'] = $total;
+        }
+
+        /**
+         * setContent
+         * 
+         * Sets the content of the page.
+         * 
+         * @access public
+         * @param  array $content
+         * @return void
+         */
+        public function setContent($content)
+        {
+            $this->_variables['content'] = $content;
+            $this->setTotal( count($content) );
         }
     }
