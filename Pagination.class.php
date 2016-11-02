@@ -334,7 +334,7 @@
          */
         public function setCurrent($current)
         {
-            $this->_variables['current'] = $current;
+            $this->_variables['current'] = (int)$current;
         }
 
         /**
@@ -405,7 +405,7 @@
          */
         public function setRPP($rpp)
         {
-            $this->_variables['rpp'] = $rpp;
+            $this->_variables['rpp'] = (int)$rpp;
         }
 
         /**
@@ -433,6 +433,6 @@
          */
         public function setTotal($total)
         {
-            $this->_variables['total'] = $total;
+            $this->_variables['total'] = (int)$total;
         }
     }
