@@ -219,12 +219,7 @@
 
             // Pages
             $currentPage = (int) $this->_variables['current'];
-            $numberOfPages = (
-                (int) ceil(
-                    $this->_variables['total'] /
-                    $this->_variables['rpp']
-                )
-            );
+            $numberOfPages = $this->getNumberOfPages();
 
             // On first page
             if ($currentPage === 1) {
@@ -338,6 +333,14 @@
         }
 
         /**
+         * Get the current page number
+         * @return integer
+         */
+        public function getCurrent() {
+            return $this->_variables['current'];
+        }
+
+        /**
          * setFull
          * 
          * See self::setClean for documentation.
@@ -409,6 +412,17 @@
         }
 
         /**
+         * Gets the number of records per page
+         * @access public
+         * @return integer
+         */
+        public function getRPP()
+        {
+            return $this->_variables['rpp'];
+        }
+
+
+        /**
          * setTarget
          * 
          * Sets the leading path for anchors.
@@ -435,4 +449,63 @@
         {
             $this->_variables['total'] = (int)$total;
         }
+
+        /**
+         * Get the total number of records available for pagination
+         * .
+         * @return int
+         */
+        public function getTotal()
+        {
+            return $this->_variables['total'];
+        }
+
+        /**
+         * Get the number of the first item on the current page.
+         *
+         * @return int
+         */
+        public function firstItem()
+        {
+            return ($this->getCurrent() - 1) * $this->getRPP() + 1;
+        }
+
+
+
+        /**
+         * Get the number of items on the current page
+         */
+        public function countCurrentItems() {
+            // on the last page there could be less records than RPP
+            if ($this->getCurrent()==$this->getNumberOfPages()) {
+                return ( $this->getTotal() % $this->getRPP() );
+            }
+            else return $this->getRPP();
+        }
+
+
+        /**
+         * Get the number of the last item on the current page.
+         *
+         * @return int
+         */
+        public function lastItem()
+        {
+            return $this->firstItem() + $this->countCurrentItems() - 1;
+        }
+
+        /**
+         * Get the whole number of pages in this pagination
+         * @return int
+         */
+        public function getNumberOfPages()
+        {
+            return (
+                (int) ceil(
+                    $this->_variables['total'] /
+                    $this->_variables['rpp']
+                )
+            );
+        }
+
     }
