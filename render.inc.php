@@ -1,4 +1,15 @@
-<?php
+<?php 
+    $tmp = array_chunk($content, $rpp);
+    if( !empty($tmp) )
+    {
+        echo '<div class="content">';
+        foreach($tmp[$current-1] as $row)
+        {
+            echo $row.'<br/>';
+        }
+        echo '</div>';
+    }
+    
     // total page count calculation
     $pages = ((int) ceil($total / $rpp));
 
