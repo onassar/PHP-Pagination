@@ -261,7 +261,7 @@
          * logic found in the render.inc.php file.
          * 
          * @access public
-         * @return void
+         * @return string
          */
         public function parse()
         {
