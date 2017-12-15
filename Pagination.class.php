@@ -11,6 +11,7 @@
      *          peripheral parameters that don't relate to the pagination
      *          series. Whereas the prev/next rel link tags include any params
      *          found in the request.
+     * @link    https://github.com/onassar/PHP-Pagination
      * @author  Oliver Nassar <onassar@gmail.com>
      * @todo    add setter parameter type and range checks w/ exceptions
      * @example
@@ -49,8 +50,8 @@
          * 
          * Sets default variables for the rendering of the pagination markup.
          * 
-         * @var    array
-         * @access protected
+         * @var     array
+         * @access  protected
          */
         protected $_variables = array(
             'classes' => array('clearfix', 'pagination'),
@@ -67,20 +68,20 @@
         /**
          * __construct
          * 
-         * @access public
-         * @param  integer $current (default: null)
-         * @param  integer $total (default: null)
-         * @return void
+         * @access  public
+         * @param   integer $current (default: null)
+         * @param   integer $total (default: null)
+         * @return  void
          */
         public function __construct($current = null, $total = null)
         {
             // current instantiation setting
-            if (!is_null($current)) {
+            if (is_null($current) === false) {
                 $this->setCurrent($current);
             }
 
             // total instantiation setting
-            if (!is_null($total)) {
+            if (is_null($total) === false) {
                 $this->setTotal($total);
             }
 
@@ -94,14 +95,14 @@
          * Checks the current (page) and total (records) parameters to ensure
          * they've been set. Throws an exception otherwise.
          * 
-         * @access protected
-         * @return void
+         * @access  protected
+         * @return  void
          */
         protected function _check()
         {
-            if (!isset($this->_variables['current'])) {
+            if (isset($this->_variables['current']) === false) {
                 throw new Exception('Pagination::current must be set.');
-            } elseif (!isset($this->_variables['total'])) {
+            } elseif (isset($this->_variables['total']) === false) {
                 throw new Exception('Pagination::total must be set.');
             }
         }
@@ -112,10 +113,10 @@
          * Sets the classes to be added to the pagination div node.
          * Useful with Twitter Bootstrap (eg. pagination-centered, etc.)
          * 
-         * @see    <http://twitter.github.com/bootstrap/components.html#pagination>
-         * @access public
-         * @param  mixed $classes
-         * @return void
+         * @see     http://twitter.github.com/bootstrap/components.html#pagination
+         * @access  public
+         * @param   mixed $classes
+         * @return  void
          */
         public function addClasses($classes)
         {
@@ -131,8 +132,8 @@
          * Tells the rendering engine to show the pagination links even if there
          * aren't any pages to paginate through.
          * 
-         * @access public
-         * @return void
+         * @access  public
+         * @return  void
          */
         public function alwaysShowPagination()
         {
@@ -142,13 +143,13 @@
         /**
          * getCanonicalUrl
          * 
-         * @access public
-         * @return string
+         * @access  public
+         * @return  string
          */
         public function getCanonicalUrl()
         {
             $target = $this->_variables['target'];
-            if (empty($target)) {
+            if (empty($target) === true) {
                 $target = $_SERVER['PHP_SELF'];
             }
             $page = (int) $this->_variables['current'];
@@ -161,9 +162,9 @@
         /**
          * getPageParam
          * 
-         * @access public
-         * @param  boolean|integer $page (default: false)
-         * @return string
+         * @access  public
+         * @param   boolean|integer $page (default: false)
+         * @return  string
          */
         public function getPageParam($page = false)
         {
@@ -177,14 +178,14 @@
         /**
          * getPageUrl
          * 
-         * @access public
-         * @param  boolean|integer $page (default: false)
-         * @return string
+         * @access  public
+         * @param   boolean|integer $page (default: false)
+         * @return  string
          */
         public function getPageUrl($page = false)
         {
             $target = $this->_variables['target'];
-            if (empty($target)) {
+            if (empty($target) === true) {
                 $target = $_SERVER['PHP_SELF'];
             }
             return 'http://' . ($_SERVER['HTTP_HOST']) . ($target) . ($this->getPageParam($page));
@@ -193,17 +194,17 @@
         /**
          * getRelPrevNextLinkTags
          * 
-         * @see    http://support.google.com/webmasters/bin/answer.py?hl=en&answer=1663744
-         * @see    http://googlewebmastercentral.blogspot.ca/2011/09/pagination-with-relnext-and-relprev.html
-         * @see    http://support.google.com/webmasters/bin/answer.py?hl=en&answer=139394
-         * @access public
-         * @return array
+         * @see     http://support.google.com/webmasters/bin/answer.py?hl=en&answer=1663744
+         * @see     http://googlewebmastercentral.blogspot.ca/2011/09/pagination-with-relnext-and-relprev.html
+         * @see     http://support.google.com/webmasters/bin/answer.py?hl=en&answer=139394
+         * @access  public
+         * @return  array
          */
         public function getRelPrevNextLinkTags()
         {
             // generate path
             $target = $this->_variables['target'];
-            if (empty($target)) {
+            if (empty($target) === true) {
                 $target = $_SERVER['PHP_SELF'];
             }
             $key = $this->_variables['key'];
@@ -260,8 +261,8 @@
          * Parses the pagination markup based on the parameters set and the
          * logic found in the render.inc.php file.
          * 
-         * @access public
-         * @return string
+         * @access  public
+         * @return  void
          */
         public function parse()
         {
@@ -284,10 +285,10 @@
         /**
          * setClasses
          * 
-         * @see    <http://twitter.github.com/bootstrap/components.html#pagination>
-         * @access public
-         * @param  mixed $classes
-         * @return void
+         * @see     http://twitter.github.com/bootstrap/components.html#pagination
+         * @access  public
+         * @param   mixed $classes
+         * @return  void
          */
         public function setClasses($classes)
         {
@@ -300,8 +301,8 @@
          * Sets the pagination to exclude page numbers, and only output
          * previous/next markup. The counter-method of this is self::setFull.
          * 
-         * @access public
-         * @return void
+         * @access  public
+         * @return  void
          */
         public function setClean()
         {
@@ -314,9 +315,9 @@
          * Sets the maximum number of 'crumbs' (eg. numerical page items)
          * available.
          * 
-         * @access public
-         * @param  integer $crumbs
-         * @return void
+         * @access  public
+         * @param   integer $crumbs
+         * @return  void
          */
         public function setCrumbs($crumbs)
         {
@@ -328,9 +329,9 @@
          * 
          * Sets the current page being viewed.
          * 
-         * @access public
-         * @param  integer $current
-         * @return void
+         * @access  public
+         * @param   integer $current
+         * @return  void
          */
         public function setCurrent($current)
         {
@@ -342,8 +343,8 @@
          * 
          * See self::setClean for documentation.
          * 
-         * @access public
-         * @return void
+         * @access  public
+         * @return  void
          */
         public function setFull()
         {
@@ -356,9 +357,9 @@
          * Sets the key of the <_GET> array that contains, and ought to contain,
          * paging information (eg. which page is being viewed).
          * 
-         * @access public
-         * @param  string $key
-         * @return void
+         * @access  public
+         * @param   string $key
+         * @return  void
          */
         public function setKey($key)
         {
@@ -370,9 +371,9 @@
          * 
          * Sets the copy of the next anchor.
          * 
-         * @access public
-         * @param  string $str
-         * @return void
+         * @access  public
+         * @param   string $str
+         * @return  void
          */
         public function setNext($str)
         {
@@ -384,9 +385,9 @@
          * 
          * Sets the copy of the previous anchor.
          * 
-         * @access public
-         * @param  string $str
-         * @return void
+         * @access  public
+         * @param   string $str
+         * @return  void
          */
         public function setPrevious($str)
         {
@@ -399,9 +400,9 @@
          * Sets the number of records per page (used for determining total
          * number of pages).
          * 
-         * @access public
-         * @param  integer $rpp
-         * @return void
+         * @access  public
+         * @param   integer $rpp
+         * @return  void
          */
         public function setRPP($rpp)
         {
@@ -413,9 +414,9 @@
          * 
          * Sets the leading path for anchors.
          * 
-         * @access public
-         * @param  string $target
-         * @return void
+         * @access  public
+         * @param   string $target
+         * @return  void
          */
         public function setTarget($target)
         {
@@ -427,9 +428,9 @@
          * 
          * Sets the total number of records available for pagination.
          * 
-         * @access public
-         * @param  integer $total
-         * @return void
+         * @access  public
+         * @param   integer $total
+         * @return  void
          */
         public function setTotal($total)
         {

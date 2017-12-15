@@ -39,7 +39,7 @@
          * if this isn't a clean output for pagination (eg. show numerical
          * links)
          */
-        if (!$clean) {
+        if ($clean === false) {
 
             /**
              * Calculates the number of leading page crumbs based on the minimum
