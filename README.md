@@ -23,9 +23,11 @@ the instance&#039;s *&lt;parse&gt; method.
     // instantiate; set current page; set number of records
     $pagination = (new Pagination());
     $pagination->setCurrent($page);
-    $pagination->setTotal(200);
+    $pagination->setTotal(200); // Total number of records
+    $pagination->setRPP(5); // Number of records per page
 
     // grab rendered/parsed pagination markup
     $markup = $pagination->parse();
+    echo $markup;
 
 ```
