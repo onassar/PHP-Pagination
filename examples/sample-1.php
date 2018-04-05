@@ -23,7 +23,10 @@ $page = isset($_GET['page']) ? ((int) $_GET['page']) : 1;
 // instantiate; set current page; set number of records
 $pagination = (new Pagination());
 $pagination->setCurrent($page);
-$pagination->setTotal(200);
+$pagination->setTotal(300);
+$pagination->setCrumbs(10);
+$pagination->setKey('page');
+$pagination->setRPP(50);
 
 // grab rendered/parsed pagination markup
 $markup = $pagination->parse();
