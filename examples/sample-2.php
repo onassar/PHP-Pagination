@@ -1,55 +1,56 @@
 <?php
 
 /**
- * Decripción Corta del archivo
+ * sample 2 - basic sample using setCrumb(), setKey() and setRPP()
  * 
- * Descripción larga (explicar próposito)...
+ * basic usage of the Pagination Class
  * 
- * IMPORTANTE:
- * Este programa es propiedad de Pagadito El Salvador S.A. de C.V. se prohibe su 
- * uso no autorizado, asi como cualquier alteración ó agregado sin previa 
- * autorización.
- * 
- * @author Edgard Rodas <e.rodas@pagadito.com>
- * @copyright Copyright (c) 2018 Pagadito El Salvador S.A. de C.V.
+ * @author Edgard Rodas <rg.edgard@gmail.com>
+ * @link https://github.com/nanacudo/PHP-Pagination
  * 
  */
 
-// get json file
-$string = file_get_contents('./posts.json');
-$array_data = json_decode($string);
-
 require_once '../Pagination.class.php';
 
+// get json data file
+$data_string = file_get_contents('./posts-comments.json');
+$data_array = json_decode($data_string);
+$total = count($data_array);
+
 // determine page (based on <_GET>)
-$page = isset($_GET['page']) ? ((int) $_GET['page']) : 1;
+$page = isset($_GET['x']) ? ((int) $_GET['x']) : 1;
 
 // instantiate; set current page; set number of records
 $pagination = (new Pagination());
 $pagination->setCurrent($page);
-$pagination->setTotal(count($array_data));
-$pagination->setCrumbs(10);
-$pagination->setKey('page');
-$pagination->setRPP(50);
-
-// determine limits of records
-$start_limit = ((($page - 1) * 50) + 1);
-$finish_limit = (($page * 50) > count($array_data) ? count($array_data) : ($page * 50));
+$pagination->setTotal($total);
+$pagination->setCrumbs(20);
+$pagination->setKey('x');
+$pagination->setRPP(15);
 
 // grab rendered/parsed pagination markup
 $markup = $pagination->parse();
+
+// determine limits of records
+$initial_limit = $pagination->getInitialLimit();
+$final_limit = $pagination->getFinalLimit();
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <title>PHP-Pagination Demo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="../themes/light.css" type="text/css" rel="stylesheet">
     </head>
     <body>
         <h1>PHP-Pagination Demo</h1>
-        <h2>DATA FROM JSON FILE - POSTS</h2>
+        <h2>Sample 2</h2>
         <table border="1px" cellspacing="0" cellpadding="5" width="100%" >
             <thead>
+                <tr>
+                    <th colspan="5">Posts Comments</th>
+                </tr>
                 <tr>
                     <th>postId</th>
                     <th>id</th>
@@ -67,8 +68,8 @@ $markup = $pagination->parse();
             </tfoot>
             <tbody>
                 <?php
-                for ($i = $start_limit; $i <= $finish_limit; $i++) {
-                    $data = $array_data[$i-1];
+                for ($i = $initial_limit; $i <= $final_limit; $i++) {
+                    $data = $data_array[$i-1];
                 ?>
                 <tr>
                     <td><?php echo $data->postId; ?></td>
@@ -82,5 +83,8 @@ $markup = $pagination->parse();
                 ?>
             </tbody>
         </table>
+        <p>
+            <a href="../index.html">Back to sample list</a>
+        </p>
     </body>
 </html>
