@@ -17,15 +17,18 @@ the instance&#039;s *&lt;parse&gt; method.
     // source inclusion
     require_once APP . '/vendors/PHP-Pagination/Pagination.class.php';
 
-    // determine page (based on <_GET>)
-    $page = isset($_GET['page']) ? ((int) $_GET['page']) : 1;
+    // set the page number (based on a URL param; cast as an int; ensure min page number)
+    $page = $_GET['page'] ?? 1;
+    $page = (int) $page;
+    $page = min($page, 1);
 
-    // instantiate; set current page; set number of records
-    $pagination = (new Pagination());
+    // instantiate; set current page; set number of records per page; number of records in total
+    $pagination = new Pagination();
     $pagination->setCurrent($page);
+    $pagination->setRPP(24);
     $pagination->setTotal(200);
 
-    // grab rendered/parsed pagination markup
+    // grab rendered pagination markup
     $markup = $pagination->parse();
 
 ```
