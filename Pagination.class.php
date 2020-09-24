@@ -436,4 +436,30 @@
         {
             $this->_variables['total'] = (int)$total;
         }
+        
+        /**
+         * getInitialLimit
+         * 
+         * Gets the number of initial limit of the records for the pagination
+         * 
+         * @return integer $initial_limit
+         */
+        public function getInitialLimit()
+        {
+            $initial_limit = ((($this->_variables['current'] - 1) * $this->_variables['rpp']) + 1);
+            return $initial_limit;
+        }
+        
+        /**
+         * getFinalLimit
+         * 
+         * Gets the number of final limit of the records for the pagination
+         * 
+         * @return integer $final_limit
+         */
+        public function getFinalLimit()
+        {
+            $final_limit = (($this->_variables['current'] * $this->_variables['rpp']) > $this->_variables['total'] ? $this->_variables['total'] : ($this->_variables['current'] * $this->_variables['rpp']));
+            return $final_limit;
+        }
     }
