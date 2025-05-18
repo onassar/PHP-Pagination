@@ -69,11 +69,11 @@
          * __construct
          * 
          * @access  public
-         * @param   integer $current (default: null)
-         * @param   integer $total (default: null)
+         * @param   null|int $current (default: null)
+         * @param   null|int $total (default: null)
          * @return  void
          */
-        public function __construct($current = null, $total = null)
+        public function __construct(?int $current = null, ?int $total = null)
         {
             // current instantiation setting
             if (is_null($current) === false) {
@@ -98,7 +98,7 @@
          * @access  protected
          * @return  void
          */
-        protected function _check()
+        protected function _check(): void
         {
             if (isset($this->_variables['current']) === false) {
                 throw new Exception('Pagination::current must be set.');
@@ -118,7 +118,7 @@
          * @param   mixed $classes
          * @return  void
          */
-        public function addClasses($classes)
+        public function addClasses($classes): void
         {
             $this->_variables['classes'] = array_merge(
                 $this->_variables['classes'],
@@ -135,7 +135,7 @@
          * @access  public
          * @return  void
          */
-        public function alwaysShowPagination()
+        public function alwaysShowPagination(): void
         {
             $this->_variables['alwaysShowPagination'] = true;
         }
@@ -163,7 +163,7 @@
          * getPageParam
          * 
          * @access  public
-         * @param   boolean|integer $page (default: false)
+         * @param   bool|int $page (default: false)
          * @return  string
          */
         public function getPageParam($page = false)
@@ -179,7 +179,7 @@
          * getPageUrl
          * 
          * @access  public
-         * @param   boolean|integer $page (default: false)
+         * @param   bool|int $page (default: false)
          * @return  string
          */
         public function getPageUrl($page = false)
@@ -262,9 +262,9 @@
          * logic found in the render.inc.php file.
          * 
          * @access  public
-         * @return  void
+         * @return  string
          */
-        public function parse()
+        public function parse(): string
         {
             // ensure required parameters were set
             $this->_check();
@@ -290,7 +290,7 @@
          * @param   mixed $classes
          * @return  void
          */
-        public function setClasses($classes)
+        public function setClasses($classes): void
         {
             $this->_variables['classes'] = (array) $classes;
         }
@@ -304,7 +304,7 @@
          * @access  public
          * @return  void
          */
-        public function setClean()
+        public function setClean(): void
         {
             $this->_variables['clean'] = true;
         }
@@ -316,10 +316,10 @@
          * available.
          * 
          * @access  public
-         * @param   integer $crumbs
+         * @param   int $crumbs
          * @return  void
          */
-        public function setCrumbs($crumbs)
+        public function setCrumbs(int $crumbs): void
         {
             $this->_variables['crumbs'] = $crumbs;
         }
@@ -330,12 +330,12 @@
          * Sets the current page being viewed.
          * 
          * @access  public
-         * @param   integer $current
+         * @param   int $current
          * @return  void
          */
-        public function setCurrent($current)
+        public function setCurrent(int $current): void
         {
-            $this->_variables['current'] = (int)$current;
+            $this->_variables['current'] = (int) $current;
         }
 
         /**
@@ -346,7 +346,7 @@
          * @access  public
          * @return  void
          */
-        public function setFull()
+        public function setFull(): void
         {
             $this->_variables['clean'] = false;
         }
@@ -361,7 +361,7 @@
          * @param   string $key
          * @return  void
          */
-        public function setKey($key)
+        public function setKey(string $key): void
         {
             $this->_variables['key'] = $key;
         }
@@ -375,7 +375,7 @@
          * @param   string $str
          * @return  void
          */
-        public function setNext($str)
+        public function setNext(string $str): void
         {
             $this->_variables['next'] = $str;
         }
@@ -389,7 +389,7 @@
          * @param   string $str
          * @return  void
          */
-        public function setPrevious($str)
+        public function setPrevious(string $str): void
         {
             $this->_variables['previous'] = $str;
         }
@@ -401,10 +401,10 @@
          * number of pages).
          * 
          * @access  public
-         * @param   integer $rpp
+         * @param   int $rpp
          * @return  void
          */
-        public function setRPP($rpp)
+        public function setRPP(int $rpp): void
         {
             $this->_variables['rpp'] = (int)$rpp;
         }
@@ -418,7 +418,7 @@
          * @param   string $target
          * @return  void
          */
-        public function setTarget($target)
+        public function setTarget(string $target): void
         {
             $this->_variables['target'] = $target;
         }
@@ -429,10 +429,10 @@
          * Sets the total number of records available for pagination.
          * 
          * @access  public
-         * @param   integer $total
+         * @param   int $total
          * @return  void
          */
-        public function setTotal($total)
+        public function setTotal(int $total): void
         {
             $this->_variables['total'] = (int)$total;
         }
