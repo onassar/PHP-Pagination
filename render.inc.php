@@ -28,6 +28,9 @@
             array('', '&'),
             $href
         );
+        if ($hash !== null) {
+            $href = ($href) . '#' . ($hash);
+        }
         if ($current === 1) {
             $href = '#';
             array_push($classes, 'disabled');
@@ -76,6 +79,9 @@
                     array('', '&'),
                     $href
                 );
+                if ($hash !== null) {
+                    $href = ($href) . '#' . ($hash);
+                }
 ?>
     <li class="number"><a data-pagenumber="<?= ($current + $x - $leading) ?>" href="<?= ($href) ?>"><?= ($current + $x - $leading) ?></a></li>
 <?php
@@ -97,6 +103,9 @@
                     array('', '&'),
                     $href
                 );
+                if ($hash !== null) {
+                    $href = ($href) . '#' . ($hash);
+                }
 ?>
     <li class="number"><a data-pagenumber="<?= ($current + $x + 1) ?>" href="<?= ($href) ?>"><?= ($current + $x + 1) ?></a></li>
 <?php
@@ -117,6 +126,9 @@
             array('', '&'),
             $href
         );
+        if ($hash !== null) {
+            $href = ($href) . '#' . ($hash);
+        }
         if ($current === $pages) {
             $href = '#';
             array_push($classes, 'disabled');

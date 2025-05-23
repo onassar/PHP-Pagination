@@ -57,6 +57,7 @@
             'classes' => array('clearfix', 'pagination'),
             'crumbs' => 5,
             'rpp' => 10,
+            'hash' => null,
             'key' => 'page',
             'target' => '',
             'next' => 'Next &raquo;',
@@ -349,6 +350,18 @@
         public function setFull(): void
         {
             $this->_variables['clean'] = false;
+        }
+
+        /**
+         * setHash
+         * 
+         * @access  public
+         * @param   string $hash
+         * @return  void
+         */
+        public function setHash(string $hash): void
+        {
+            $this->_variables['hash'] = $hash;
         }
 
         /**
